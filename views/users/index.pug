@@ -1,0 +1,25 @@
+doctype html
+head
+  title Register Now
+  style 
+    include style.css
+body 
+  .user
+    header.user__header
+      img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg' alt='')
+      h1.user__title Register Now
+    form.form(action='/users/add_user.js' method='”post”')
+      .form__group
+        input.form__input(type='text' placeholder='Username')
+      .form__group
+        input.form__input(type='number' placeholder='Phone Number')
+      .form__group
+        //-input.form__input(type='text' placeholder='State')
+        select.form__input(name='state' style='cursor: pointer;' required='true')
+          option#state_default(selected='selected' value='' style='display: none;')  Select State 
+          option(value='Gujarat')  Gujarat 
+          option(value='Maharashtra')  Maharashtra 
+      button.btn(type='button') Register
+
+  script 
+    include scriptt.js
