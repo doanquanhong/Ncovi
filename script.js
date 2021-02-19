@@ -54,7 +54,7 @@ const send_msg = async() => {
         client.messages.create({
             body: gj_msg,
             from: process.env.PHN_NUM,
-            to: '+91' + user,
+            to: '+84763061890',
         }).then((msg) => console.log(msg.sid)).catch((err) => console.log(err))
     })
 
@@ -63,7 +63,7 @@ const send_msg = async() => {
             client.messages.create({
                 body: mh_msg,
                 from: process.env.PHN_NUM,
-                to: '+91' + user,
+                to: '+84763061890',
             }).then((msg) => console.log(msg.sid)).catch((err) => console.log(err))
         })
 }
