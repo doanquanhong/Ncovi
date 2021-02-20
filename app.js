@@ -36,10 +36,11 @@ client.messages.create({
 
 
 const script = require('./script')
+const cool = require('./cool')
 
-app.listen(process.env.PORT || 3000, () => {
-  script.task.start()
-})
+// app.listen(process.env.PORT || 3000, () => {
+//   script.task.start()
+// })
 
 module.exports = app
 
