@@ -1,7 +1,7 @@
 //ket noi Twilio
 const accountSid = process.env.ACCOUNT_SID
 const authToken = process.env.AUTH_TOKEN
-const client = require('twilio')(accountId, authToken)
+const client = require('twilio')(accountSid, authToken)
 
 client.messages.create({
   body: 'Thank you for your registration. You will receive Corona Virus update everyday. To stop the service reply with "STOP"',

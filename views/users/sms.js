@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const MessagingResponse = require('twilio').twiml.MessagingResponse
-const User = require('../Models/User')
+const User = require('../../Models/User')
 
 router.post('/', async (req, res) => {
     const twiml = new MessagingResponse()

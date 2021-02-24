@@ -71,7 +71,7 @@ const send_msg = async() => {
 const cron = require('node-cron')
  
 exports.task = cron.schedule('* * * * *', () =>  {
-    console.log('stoped task')
+    console.log('Running...')
   }, {
     scheduled: false,
     timezone: "Asia/Bangkok"

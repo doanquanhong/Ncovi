@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-router.get('/register', (req, res) => {
-    res.render('register')
+router.get('../users/register', (req, res) => {
+    res.render('../users/register')
 })
 
-const User = require('../models/User')
+const User = require('../Models/User')
 
-router.post('/add_user', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         const { name, number, state } = req.body
 
@@ -25,7 +25,7 @@ router.post('/add_user', async (req, res) => {
             state: state,
         })
         const addedUser = await user.save()
-        res.redirect('/users/register/successful')
+        res.redirect('/users/register/success')
     }
     } catch (error) {
         console.error();

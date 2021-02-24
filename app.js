@@ -1,6 +1,14 @@
 //import express vào app 
 const app = require('express')()
 
+
+const bodyParser = require('body-parser')
+const User = require('./Models/User')
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
+app.use(bodyParser.json())
+
 //khởi tạo express
 app.set('view engine', 'ejs')
 app.set('views',__dirname + '/views')
@@ -17,30 +25,32 @@ app.get('/', function(req, res) {
   res.render('users/index')
 })
 
-const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({
-  extended: false
-}))
-app.use(bodyParser.json())
+app.get('/register', function(req, res) {
+  res.render('users/register')
+})
 
-//ket noi Twilio - send sms a ? :)))
-const accountSid = process.env.ACCOUNT_SID
-const authToken = process.env.AUTH_TOKEN
-const client = require('twilio')(accountSid, authToken)
+app.post('/users/register', function(req, res) {
+  console.log(req.body)
+  res.redirect('/success')
+})
 
-client.messages.create({
-  body: 'Thank you for your registration. You will receive Corona Virus update everyday. To stop the service reply with "Stop"',
-  from: process.env.PHN_NUM,
-  to: +84763061890,//user's mobile number (with country code).,
-}).then(message => console.log(message.sid))
+// app.get('/users/add_user', (req,res) => {
+//   res.render('users/success')
+// })
 
+app.get('/success', function(req, res) {
+  res.render('users/success')
+})
+
+app.get('/add_user', function(req, res) {
+  res.render('users/add_user')
+})
 
 const script = require('./script')
-const cool = require('./cool')
 
-// app.listen(process.env.PORT || 3000, () => {
-//   script.task.start()
-// })
+app.listen(process.env.PORT || 3000, () => {
+  script.task.start()
+})
 
 module.exports = app
 

@@ -1,25 +1,14 @@
 doctype html
 head
-  title Register Now
+  title Update Covid - 19
+  script(src='https://kit.fontawesome.com/d61772df8e.js' crossorigin='anonymous')
   style 
-    include style.css
+    include ../public/assest/css/style.css
 body 
   .user
     header.user__header
-      img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg' alt='')
-      h1.user__title Register Now
-    form.form(action='/users/add_user.js' method='”post”')
-      .form__group
-        input.form__input(type='text' placeholder='Username')
-      .form__group
-        input.form__input(type='number' placeholder='Phone Number')
-      .form__group
-        //-input.form__input(type='text' placeholder='State')
-        select.form__input(name='state' style='cursor: pointer;' required='true')
-          option#state_default(selected='selected' value='' style='display: none;')  Select State 
-          option(value='Gujarat')  Gujarat 
-          option(value='Maharashtra')  Maharashtra 
-      button.btn(type='button') Register
-
-  script 
-    include scriptt.js
+      i.fas.fa-shield-virus
+      h1.user__title Update NCOVI - 19
+      hr
+      p Register your mobile number once and get update of new cases in India and also in your state twice a day
+    input( class='btn' type='button' onclick="location.href='register'" value='Register Now')

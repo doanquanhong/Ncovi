@@ -1,5 +1,5 @@
 :root {
-    --font-family: 'Arial';
+    --font-family: 'San-Seri';
     --font-size:     1.5em;
     --color-primary: #167c80;
 }
@@ -19,6 +19,28 @@ body {
     transform: translate3d(0, 0, 0);
     background: linear-gradient(45deg, #49D49D 10%, #A2C7E5 90%);
     height: 100vh
+}
+
+
+.fas {
+    color: #fff;
+    font-size: xxx-large;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: justify;
+    margin-top: 30px;
+    color: #fff;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #fff;
+    border: solid 1px;
 }
 
 .user {
@@ -75,8 +97,9 @@ body {
     cursor: pointer;
     display: block;
     width: 100%;
+    margin-top: 30px;
     padding: 20px;
-    font-family: var(--font-family);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     -webkit-appearance: none;
     outline: 0;
     border: 0;

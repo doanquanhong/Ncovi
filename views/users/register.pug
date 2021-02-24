@@ -1,0 +1,26 @@
+doctype html
+head
+  title Register Now
+  script(src='https://kit.fontawesome.com/d61772df8e.js' crossorigin='anonymous')
+  style 
+    include ../public/assest/css/style.css
+body 
+  .user
+    header.user__header
+      i.fas.fa-shield-virus
+      h1.user__title NCOVI - 19
+      hr
+      h1.user__title Register Now
+    form.form(action='/users/register' method='post')
+      .form__group
+        input.form__input(type='text' name='name' class='form-control' id='name' required='true' placeholder='Username')
+      .form__group
+        input.form__input(type='number' name='number' class='form-control' id='number' required='true' aria-describedby='phoneHelp' placeholder='Phone Number')
+      .form__group
+        //-input.form__input(type='text' placeholder='State')
+        select.form__input(name='state' id='state' style='cursor: pointer;' required='true')
+          option#state_default(selected='selected' value='' style='display: none;')  Select State 
+          option(value='Gujarat')  Gujarat 
+          option(value='Maharashtra')  Maharashtra 
+      //- input( class='btn' type='button' onclick="location.href='success'" value='Count Me In!')
+      button.btn.btn-primary(type='submit') Count Me In!
