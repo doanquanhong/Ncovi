@@ -1,5 +1,5 @@
 :root {
-    --font-family: 'San-Seri';
+    --font-family:  'Garramond';
     --font-size:     1.5em;
     --color-primary: #167c80;
 }
@@ -30,7 +30,7 @@ body {
 
 p {
     font-size: 18px !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-family);
     text-align: justify;
     margin-top: 30px;
     color: #fff;
@@ -99,7 +99,7 @@ hr {
     width: 100%;
     margin-top: 30px;
     padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-family);
     -webkit-appearance: none;
     outline: 0;
     border: 0;

@@ -9,17 +9,15 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 
-//khởi tạo express
-app.set('view engine', 'ejs')
-app.set('views',__dirname + '/views')
-
-
 require('dotenv').config()
+
+// kết nối Database MongoDB
 
 
 // //pug
 app.set('views', './views')
 app.set('view engine', 'pug')
+
 
 app.get('/', function(req, res) {
   res.render('users/index')
@@ -33,10 +31,6 @@ app.post('/users/register', function(req, res) {
   console.log(req.body)
   res.redirect('/success')
 })
-
-// app.get('/users/add_user', (req,res) => {
-//   res.render('users/success')
-// })
 
 app.get('/success', function(req, res) {
   res.render('users/success')
