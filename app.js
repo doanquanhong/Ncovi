@@ -1,9 +1,9 @@
 //import express vào app 
 const app = require('express')()
-
-
 const bodyParser = require('body-parser')
-const User = require('./Models/User')
+const mongoose = require('mongoose')
+
+// const User = require('./Models/User')
 app.use(bodyParser.urlencoded({
   extended: false
 }))
@@ -14,9 +14,21 @@ require('dotenv').config()
 // kết nối Database MongoDB
 
 
+mongoose.connect(process.env.DB_CONN, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(function() {
+  console.log('Successfully connected to the database');
+}).catch(function(err) {
+  console.log('Could not connect to the database. Exiting now...', err);
+  process.exit()
+})
+
+
 // //pug
 app.set('views', './views')
 app.set('view engine', 'pug')
+
 
 
 app.get('/', function(req, res) {
