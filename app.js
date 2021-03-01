@@ -35,7 +35,6 @@ app.use(passport.session())
 
 // kết nối Database MongoDB
  mongoose.connect(process.env.DB_CONN, {
-// mongoose.connect('mongodb://localhost:27017/update', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(function() {
