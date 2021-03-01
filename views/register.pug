@@ -1,17 +1,13 @@
-doctype html
-head
-  title Register Now
-  script(src='https://kit.fontawesome.com/d61772df8e.js' crossorigin='anonymous')
-  style 
-    include ../public/assest/css/style.css
-body 
-  .user
+extends layout
+
+block content
+  div.user
     header.user__header
       i.fas.fa-shield-virus
       h1.user__title NCOVI - 19
       hr
       h1.user__title Register Now
-    form.form(action='/users/register' method='post')
+    form.form(action='/register' method='post')
       .form__group
         input.form__input(type='text' name='name' class='form-control' id='name' required='true' placeholder='Username')
       .form__group

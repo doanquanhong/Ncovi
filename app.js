@@ -1,20 +1,41 @@
 //import express vào app 
+require('dotenv').config()
 const app = require('express')()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const session = require('express-session')
+const passport = require('passport')
+const flash = require('connect-flash')
 
-// const User = require('./Models/User')
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
+require('./config/passport')
+var User = require('./Models/User')
+
 app.use(bodyParser.urlencoded({
   extended: false
 }))
 app.use(bodyParser.json())
 
-require('dotenv').config()
+app.use(session({
+  secret: 'adsa897adsa98bs',
+  resave: false,
+  saveUninitialized: false,
+}))
+
+app.use(flash())
+app.use(passport.initialize())
+app.use(passport.session())
 
 // kết nối Database MongoDB
-
-
-mongoose.connect(process.env.DB_CONN, {
+ mongoose.connect(process.env.DB_CONN, {
+// mongoose.connect('mongodb://localhost:27017/update', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(function() {
@@ -26,31 +47,35 @@ mongoose.connect(process.env.DB_CONN, {
 
 
 // //pug
-app.set('views', './views')
+app.set('views',path.join(__dirname, './views'))
 app.set('view engine', 'pug')
 
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.get('/', function(req, res) {
-  res.render('users/index')
-})
 
-app.get('/register', function(req, res) {
-  res.render('users/register')
-})
+app.use('/', indexRouter);
+app.use(usersRouter);
 
-app.post('/users/register', function(req, res) {
-  console.log(req.body)
-  res.redirect('/success')
-})
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-app.get('/success', function(req, res) {
-  res.render('users/success')
-})
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
-app.get('/add_user', function(req, res) {
-  res.render('users/add_user')
-})
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
 
 const script = require('./script')
 

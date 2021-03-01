@@ -1,39 +1,96 @@
 const express = require('express')
 const router = express.Router()
-router.get('../users/register', (req, res) => {
-    res.render('../users/register')
-})
-
+var passport = require('passport')
+const {check, validationResult} = require('express-validator')
 const User = require('../Models/User')
 
-router.post('/register', async (req, res) => {
-    try {
-        const { name, number, state } = req.body
+/* GET Homepage. */
+router.get('/', function(req, res, next) {
+  res.render('index')
+});
 
-    const new_user = await User.aggregate([{
-        $match: { number: number}
-    }])
-
-    if (new_user.length != 0) {
-        res.render('already_registered', {
-            message: 'It Seems Like, This number is already, registered with  us!',
-        })
-    } else {
-        const user = new User( {
-            name: name,
-            number: number,
-            state: state,
-        })
-        const addedUser = await user.save()
-        res.redirect('/users/register/success')
-    }
-    } catch (error) {
-        console.error();
-        res.json({message: error})
-    }   
+// GET register
+router.get('/register', function(req, res, next) {
+    var messages = req.flash('error')
+    res.render('register', {
+      messages: messages,
+      hasErrors: messages.length > 0,
+    })
 })
 
-// const User = require('../Models/User')
+// POST Register page
+
+router.post('/register', async (req, res) => {
+        try {
+            const { name, number, state } = req.body
+    
+        const new_user = await User.aggregate([{
+            $match: { number: number}
+        }])
+    
+        if (new_user.length != 0) {
+            res.render('/', {
+                message: 'It Seems Like, This number is already, registered with  us!',
+            })
+        } else {
+            const user = new User( {
+                name: name,
+                number: number,
+                state: state,
+            })
+            const addedUser = await user.save()
+            res.redirect('/success')
+        }
+        } catch (error) {
+            console.error();
+            res.json({message: error})
+        }   
+    }),passport.authenticate('local.register', {
+    successRedirect: '/success', // Chuyển hướng tới trang success sau khi đăng kí thành công
+    failureRedirect: '/register', // Ở lại trang nấu lỗi
+    failureFlash: true
+  })
+
+
+  // GET Success page
+router.get('/success', function(req, res, next) {
+    var messages = req.flash('error')
+    res.render('success', {
+      message: messages,
+      hasErrors: messages.length > 0,
+    })
+  })
+
+
+
+// router.post('/register', async (req, res) => {
+//     try {
+//         const { name, number, state } = req.body
+
+//     const new_user = await User.aggregate([{
+//         $match: { number: number}
+//     }])
+
+//     if (new_user.length != 0) {
+//         res.render('already_registered', {
+//             message: 'It Seems Like, This number is already, registered with  us!',
+//         })
+//     } else {
+//         const user = new User( {
+//             name: name,
+//             number: number,
+//             state: state,
+//         })
+//         const addedUser = await user.save()
+//         res.redirect('/users/register/success')
+//     }
+//     } catch (error) {
+//         console.error();
+//         res.json({message: error})
+//     }   
+// })
+
+    // const User = require('../Models/User')
 const get_users = async() => {
   let number = {}
 
@@ -63,20 +120,20 @@ const send_msg = async() => {
     const mh_msg = 'New Cases in Maharashtra: ${cases_data.mh_new}\nTotal Cases in Maharashtra: ${cases_data.mh_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe'
     
     // Sending Messages To Users In Gujarat
-    users_num.GJ.array.forEach(element => {
+    users_num.GJ.array.forEach((user) => {
         client.messages.create({
             body: gj_msg,
             from: process.env.PHN_NUM,
-            to: '+84763061890',
+            to: '+84' + user,
         }).then((msg) => console.log(msg.sid)).catch((err) => console.log(err))
     })
 
         // Sending Messages To Users In Maharashtra
-        users_num.MH.array.forEach(element => {
+        users_num.MH.array.forEach((user) => {
             client.messages.create({
                 body: mh_msg,
                 from: process.env.PHN_NUM,
-                to: '+84763061890',
+                to: '+84' + user,
             }).then((msg) => console.log(msg.sid)).catch((err) => console.log(err))
         })
 }
