@@ -22,22 +22,22 @@ const get_data = async() => {
 
 // const User = require('../Models/User')
 const get_users = async() => {
-let number = {}
+    let number = {}
 
-//Getting all the active users from the Database
-const active_users = await User.find({
-    active: true,
-})
+    //Getting all the active users from the Database
+    const active_users = await User.find({
+        active: true,
+    })
 
-//Getting an array of numbers of Active Users in Grujiat
-guj_user_num = active_users.filter((user) => user.state === 'Gujarat').map((user) => user.number)
-//Getting an array of numbers of Active Users in Maharashtra
-mh_user_num = active_users.filter((user) => user.state == 'Maharashtra').map((user) => user.number)
+    //Getting an array of numbers of Active Users in Grujiat
+    guj_user_num = active_users.filter((user) => user.state === 'Gujarat').map((user) => user.number)
+    //Getting an array of numbers of Active Users in Maharashtra
+    mh_user_num = active_users.filter((user) => user.state == 'Maharashtra').map((user) => user.number)
 
-number.GJ = guj_user_num
-number.MH = mh_user_num
+    number.GJ = guj_user_num
+    number.MH = mh_user_num
 
-return number
+    return number
 }
 
 const send_msg = async() => {
@@ -45,9 +45,9 @@ const send_msg = async() => {
     const users_num = await get_users()
     const cases_data = await get_data()
     // Message For Gujarat Users
-    const gj_msg = 'New Cases in Gujarat: ${cases_data.gj_new}\nTotal Cases in Gujarat: ${cases_data.gj_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe '
+    const gj_msg = `New Cases in Gujarat: ${cases_data.gj_new}\nTotal Cases in Gujarat: ${cases_data.gj_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe `
     // Message For Gujarat Users
-    const mh_msg = 'New Cases in Maharashtra: ${cases_data.mh_new}\nTotal Cases in Maharashtra: ${cases_data.mh_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe'
+    const mh_msg = `New Cases in Maharashtra: ${cases_data.mh_new}\nTotal Cases in Maharashtra: ${cases_data.mh_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe`
     
     // Sending Messages To Users In Gujarat
     users_num.GJ.array.forEach((user) => {
@@ -78,3 +78,6 @@ exports.task = cron.schedule('* * * * *', () =>  {
     scheduled: false,
     timezone: "Asia/Bangkok"
   })
+
+
+  
