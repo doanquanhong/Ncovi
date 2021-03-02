@@ -40,32 +40,32 @@ const get_users = async() => {
     return number
 }
 
-const send_msg = async() => {
+function send_msg() {
     // Getting Users' Mobile Numbers And Data From API.
-    const users_num = await get_users()
-    const cases_data = await get_data()
+    const users_num = await get_users();
+    const cases_data = await get_data();
     // Message For Gujarat Users
-    const gj_msg = `New Cases in Gujarat: ${cases_data.gj_new}\nTotal Cases in Gujarat: ${cases_data.gj_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe `
+    const gj_msg = `New Cases in Gujarat: ${cases_data.gj_new}\nTotal Cases in Gujarat: ${cases_data.gj_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe `;
     // Message For Gujarat Users
-    const mh_msg = `New Cases in Maharashtra: ${cases_data.mh_new}\nTotal Cases in Maharashtra: ${cases_data.mh_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe`
-    
+    const mh_msg = `New Cases in Maharashtra: ${cases_data.mh_new}\nTotal Cases in Maharashtra: ${cases_data.mh_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe`;
+
     // Sending Messages To Users In Gujarat
     users_num.GJ.array.forEach((user) => {
         client.messages.create({
             body: gj_msg,
             from: process.env.PHN_NUM,
             to: '+84' + user,
-        }).then((msg) => console.log(msg.sid)).catch((err) => console.log(err))
-    })
+        }).then((msg) => console.log(msg.sid)).catch((err) => console.log(err));
+    });
 
-        // Sending Messages To Users In Maharashtra
-        users_num.MH.array.forEach((user) => {
-            client.messages.create({
-                body: mh_msg,
-                from: process.env.PHN_NUM,
-                to: '+84' + user,
-            }).then((msg) => console.log(msg.sid)).catch((err) => console.log(err))
-        })
+    // Sending Messages To Users In Maharashtra
+    users_num.MH.array.forEach((user) => {
+        client.messages.create({
+            body: mh_msg,
+            from: process.env.PHN_NUM,
+            to: '+84' + user,
+        }).then((msg) => console.log(msg.sid)).catch((err) => console.log(err));
+    });
 }
 
 
