@@ -14,7 +14,7 @@ const flash = require('connect-flash')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-// var smsRouter = require('./routes/sms')
+var smsRouter = require('./routes/sms')
 
 require('./config/passport')
 var User = require('./Models/User')
@@ -60,7 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use(usersRouter);
-// app.use(smsRouter)
+app.use(smsRouter)
 
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

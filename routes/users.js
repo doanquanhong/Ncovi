@@ -36,7 +36,7 @@ router.post('/register', async (req, res) => {
             const user = new User( {
                 name: name,
                 number: number,
-                state: state,
+                state: state, 
             })
             const addedUser = await user.save()
             // Saving the user to the database.
