@@ -40,7 +40,7 @@ const get_users = async() => {
     return number
 }
 
-function send_msg() {
+const send_msg = async() => {
     // Getting Users' Mobile Numbers And Data From API.
     const users_num = await get_users();
     const cases_data = await get_data();
