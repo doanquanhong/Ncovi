@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 router.get('/register', function(req, res, next) {
     var messages = req.flash('error')
     res.render('register', {
+      title: 'Register',
       messages: messages,
       hasErrors: messages.length > 0,
     })
@@ -57,6 +58,7 @@ router.post('/register', async (req, res) => {
 router.get('/success', function(req, res, next) {
     var messages = req.flash('error')
     res.render('success', {
+      title: 'Success',
       message: messages,
       hasErrors: messages.length > 0,
     })
