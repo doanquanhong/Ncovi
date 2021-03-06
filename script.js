@@ -2,7 +2,7 @@
 const fetch = require('node-fetch')
 const get_data = async() => {
     cases = {}
-    await fetch('https://api.covid19india.org/data.json').then((res) => {
+    await fetch('https://corona.lmao.ninja/v2/countries/vn').then((res) => {
         return res.json();
     }).then((data) => {
         data_array = data.statewise

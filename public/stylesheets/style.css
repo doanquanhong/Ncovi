@@ -1,7 +1,8 @@
 :root {
-    --font-family:  'Garramond';
+    --font-family:  'Nunito';
     --font-size:     1.5em;
-    --color-primary: #167c80;
+    --color-primary: #feeae2;
+    --font-weight: 900;
 }
 
 
@@ -17,13 +18,13 @@ body {
     background-size: 200% 100% !important;
     animation: move 10s ease infinite;
     transform: translate3d(0, 0, 0);
-    background: linear-gradient(45deg, #49D49D 10%, #A2C7E5 90%);
+    background: var(--color-primary);
     height: 100vh
 }
 
 
 .fas {
-    color: #fff;
+    color: #5c6bc7;
     font-size: xxx-large;
     margin-bottom: 10px;
 }
@@ -58,8 +59,8 @@ hr {
 .user__title {
     font-size: var(--font-size);
     margin-bottom: -10px;
-    font-weight: 500;
-    color: white;
+    font-weight: var(--font-weight);
+    color: #000;
 }
 
 .form {
@@ -82,6 +83,7 @@ hr {
     width: 100%;
     padding: 20px;
     font-family: var(--font-family);
+    font-weight: var(--font-weight);
     -webkit-appearance: none;
     border: 0;
     outline: 0;
@@ -99,16 +101,17 @@ hr {
     margin-top: 30px;
     padding: 20px;
     font-family: var(--font-family);
+    font-weight: var(--font-weight);
     -webkit-appearance: none;
     outline: 0;
     border: 0;
-    color: white;
+    color: #fd6a69;
     background: var(--color-primary);
     transition: 0.3s;
 }
     .btn:hover {
-        background: darken(var(--color-primary), 5%);
-        color: #167c80;
+        background: #fd6a69;
+        color: #fff;
         font-size: larger;
     }
 

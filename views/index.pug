@@ -1,10 +1,54 @@
 extends layout
 
 block content
-  div.user
-    header.user__header
-      i.fas.fa-shield-virus
-      h1.user__title Update NCOVI - 19
-      hr
-      p Register your mobile number once and get update of new cases in India and also in your state twice a day
-    input( class='btn' type='button' onclick="location.href='register'" value='Register Now')
+
+  // ====== HEADER PART START ======
+  header.header-area
+    .navbar-area.headroom
+      .container
+        .row
+          .col-lg-12
+            nav.navbar.navbar-expand-lg
+              a.navbar-brand(href='/')
+                //img(src='assets/images/logo-defen.png' alt='Logo')
+                | Update Corona in Vietnam
+              #navbarSupportedContent.collapse.navbar-collapse.sub-menu-bar
+                ul#nav.navbar-nav.m-auto
+                  li.nav-item.active
+                    a(href='#home') Home
+                  li.nav-item
+                    a(href='#about') About 
+                  li.nav-item
+                    a(href='https://coronastatistics.live/country/vietnam') Ncovi Lives
+              // navbar collapse
+              .navbar-btn.d-none.d-sm-inline-block
+                button.main-btn(data-scroll-nav='0' onclick="location.href='register'") Register Updates
+            // navbar
+        // row
+      // container
+    // navbar area
+    #home.header-hero.bg_cover.d-lg-flex.align-items-center
+      .container
+        .row
+          .col-lg-7
+            .header-hero-content
+              h1.hero-title.wow.fadeInUp(data-wow-duration='1s' data-wow-delay='0.2s')
+                b Get Latest 
+                span Updates
+                br
+                | In Your 
+                b Inbox.
+              p.text.wow.fadeInUp(data-wow-duration='1s' data-wow-delay='0.5s')
+                | Register your mobile number once and get update of new cases in your state twice a day.
+              .header-singup.wow.fadeInUp(data-wow-duration='1s' data-wow-delay='0.8s')
+                button.main-btn(onclick="location.href='register'") Register Now
+            // header hero content
+        // row
+      // container
+      .header-hero-image.d-flex.align-items-center.wow.fadeInRightBig(data-wow-duration='1s' data-wow-delay='1.1s')
+        .image
+          img(src='assets/images/df-05.png' alt='Hero Image')
+      // header hero image
+    // header hero
+  // ====== HEADER PART ENDS ======
+
