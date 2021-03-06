@@ -22,6 +22,9 @@ body {
     height: 100vh
 }
 
+.headsort {
+    text-align: left;
+}
 
 .fas {
     color: #5c6bc7;
