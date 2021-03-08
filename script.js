@@ -8,7 +8,6 @@ const get_data = async() => {
     await fetch('https://corona.lmao.ninja/v2/countries/vn').then((res) => {
         return res.json();
     }).then((data) => {
-        //<li class="list-group-item"><strong>Country: ${data.country}</strong></li>
         data_country = data.country === 'Vietnam'[0]
 
         caseses.total_cases = data_country.cases

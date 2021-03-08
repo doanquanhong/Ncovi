@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
         }])
     
         if (new_user.length != 0) {
-            res.render('/', {
+            res.render('register', {
                 message: 'It Seems Like, This number is already, registered with  us!',
             })
         } else {
@@ -41,16 +41,16 @@ router.post('/register', async (req, res) => {
             })
             const addedUser = await user.save()
             // Saving the user to the database.
-            res.redirect('/success')
+            res.redirect('success')
         }
         } catch (error) {
             console.error();
             res.json({message: error})
         }   
-    }),passport.authenticate('local.register', {
-    successRedirect: '/success', // Chuyển hướng tới trang success sau khi đăng kí thành công
-    failureRedirect: '/register', // Ở lại trang nấu lỗi
-    failureFlash: true
+    // }),passport.authenticate('local.register', {
+    // successRedirect: '/success', // Chuyển hướng tới trang success sau khi đăng kí thành công
+    // failureRedirect: '/register', // Ở lại trang nếu lỗi
+    // failureFlash: true
   })
 
 
