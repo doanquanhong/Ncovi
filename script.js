@@ -1,26 +1,26 @@
 
 const fetch = require('node-fetch')
+const User = require('./Models/User')
+
+
 const get_data = async() => {
-    cases = {}
+    caseses = {}
     await fetch('https://corona.lmao.ninja/v2/countries/vn').then((res) => {
         return res.json();
     }).then((data) => {
-        data_array = data.statewise
-        total_obj = data_array.filter((data) => data.state === 'Total')[0]
-        gj_obj = data_array.filter((data) => data.state === 'Gujarat')[0]
-        mh_obj = data_array.filter((data) => data.state === 'Maharashtra')[0]
+        //<li class="list-group-item"><strong>Country: ${data.country}</strong></li>
+        data_country = data.country === 'Vietnam'[0]
 
-        cases.total_cases = total_obj.confirmed
-        cases.total_new = total_obj.deltaconfirmed
-        cases.mh_total = mh_obj.confirmed
-        cases.mh_new = mh_obj.deltaconfirmed
-        cases.gj_total = gj_obj.confirmed
-        cases.gj_new = gj_obj.deltaconfirmed
+        caseses.total_cases = data_country.cases
+        caseses.total_new = data_country.todayCases
+        caseses.deaths_cases = data_country.deaths
+        caseses.deaths_new = data_country.todayDeaths
+        caseses.recovered_cases = data_country.recovered
+        caseses.recovered_new = data_country.todayRecovered
     }).then()
-    return cases
+    return caseses
 }   
 
-// const User = require('../Models/User')
 const get_users = async() => {
     let number = {}
 
@@ -29,13 +29,10 @@ const get_users = async() => {
         active: true,
     })
 
-    //Getting an array of numbers of Active Users in Grujiat
-    guj_user_num = active_users.filter((user) => user.state === 'Gujarat').map((user) => user.number)
-    //Getting an array of numbers of Active Users in Maharashtra
-    mh_user_num = active_users.filter((user) => user.state == 'Maharashtra').map((user) => user.number)
+    //Getting an array of numbers of Active Users in Vietnam
+    vn_user_num = active_users.filter((user) => user.state === 'Việt Nam').map((user) => user.number)
 
-    number.GJ = guj_user_num
-    number.MH = mh_user_num
+    number.VN = vn_user_num
 
     return number
 }
@@ -44,40 +41,29 @@ const send_msg = async() => {
     // Getting Users' Mobile Numbers And Data From API.
     const users_num = await get_users();
     const cases_data = await get_data();
-    // Message For Gujarat Users
-    const gj_msg = `New Cases in Gujarat: ${cases_data.gj_new}\nTotal Cases in Gujarat: ${cases_data.gj_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe `;
-    // Message For Gujarat Users
-    const mh_msg = `New Cases in Maharashtra: ${cases_data.mh_new}\nTotal Cases in Maharashtra: ${cases_data.mh_total} \n New Cases in India: ${cases_data.total_new}\nTotal Cases in India: ${cases_data.total_cases} \n #StayHome #StaySafe`;
+    // Message For Vietnam Users
+    const vn_msg = `Covid-19 Updates \nNew Cases in Viet Nam: ${cases_data.total_new}\nTotal Cases in Viet Nam: ${cases_data.total_cases} \n New Cases Deaths in Viet Nam: ${cases_data.deaths_new}\nTotal Cases Deaths in Viet Nam: ${cases_data.deaths_cases}
+    New Cases Recovered in Viet Nam: ${cases_data.recovered_new}\nTotal Cases Recovered in Viet Nam: ${cases_data.recovered_cases} \n \n #StayHome #StaySafe :))`;
 
-    // Sending Messages To Users In Gujarat
-    users_num.GJ.array.forEach((user) => {
+    // Sending Messages To Users In Vietnam
+    
+    users_num.VN.array.forEach((user) => {
         client.messages.create({
-            body: gj_msg,
+            body: vn_msg,
             from: process.env.PHN_NUM,
             to: '+84' + user,
         }).then((msg) => console.log(msg.sid)).catch((err) => console.log(err));
-    });
-
-    // Sending Messages To Users In Maharashtra
-    users_num.MH.array.forEach((user) => {
-        client.messages.create({
-            body: mh_msg,
-            from: process.env.PHN_NUM,
-            to: '+84' + user,
-        }).then((msg) => console.log(msg.sid)).catch((err) => console.log(err));
-    });
+    })
 }
-
 
 
 const cron = require('node-cron')
  
-exports.task = cron.schedule('* * * * *', () =>  {
+exports.task = cron.schedule('*/5 * * * *', () =>  {
+    send_msg()
     console.log('Running...')
   }, {
     scheduled: false,
     timezone: "Asia/Bangkok"
   })
-
-
-  
+  //module.exports = send_msg;
