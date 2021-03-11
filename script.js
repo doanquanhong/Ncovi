@@ -66,7 +66,7 @@ const send_msg = async() => {
 
 const cron = require('node-cron')
  
-exports.task = cron.schedule('* * * * *', () =>  {
+exports.task = cron.schedule('*/5 * * * *', () =>  {
     send_msg()
 
     console.log('Running...')

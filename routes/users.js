@@ -47,10 +47,6 @@ router.post('/register', async (req, res) => {
             console.error();
             res.json({message: error})
         }   
-    // }),passport.authenticate('local.register', {
-    // successRedirect: '/success', // Chuyển hướng tới trang success sau khi đăng kí thành công
-    // failureRedirect: '/register', // Ở lại trang nếu lỗi
-    // failureFlash: true
   })
 
 
