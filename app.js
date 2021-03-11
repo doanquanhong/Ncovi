@@ -12,18 +12,12 @@ const session = require('express-session')
 const passport = require('passport')
 const flash = require('connect-flash')
 
-const accountSid = process.env.ACCOUNT_SID
-const authToken = process.env.AUTH_TOKEN
-const client = require('twilio')(accountSid, authToken)
-const cronJob = require('node-cron').CronJob;
-
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var smsRouter = require('./routes/sms')
 
 require('./config/passport')
-var User = require('./Models/User')
 
 app.use(bodyParser.urlencoded({
   extended: false

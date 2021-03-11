@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-var passport = require('passport')
+//var passport = require('passport')
 const User = require('../Models/User')
 
 /* GET Homepage. */
